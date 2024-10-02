@@ -11,13 +11,13 @@ const changePass = (req, res) =>{
 const updatePass = (req, res) =>{
     const {password} = req.user;
 
-    const {cur_pass, new_pass, conf_pass} = req.body;
+    const {current_pass, new_pass, confirm_pass} = req.body;
 
-    bcrypt.compare(cur_pass, password, (err, result) =>{
+    bcrypt.compare(current_pass, password, (err, result) =>{
 
         if(result){
             // console.log('password match');
-            if(new_pass == conf_pass){
+            if(new_pass == confirm_pass){
 
                 bcrypt.hash(new_pass,10,async (err,hashPass) =>{
                     console.log("Hash", hashPass);
