@@ -61,8 +61,7 @@ const myBlogUpdateCon = async (req, res) => {
     updateData.userName = req.body.userName;
     updateData.date = req.body.date;
     updateData.description = req.body.description;
-
-    // handel try cache 
+ 
     try {
         const newUpdateBlog = await blog_model.findByIdAndUpdate(id , updateData , {new : true})
         console.log(newUpdateBlog, "newUpdateBlog");

@@ -33,20 +33,21 @@
             <li class="nav-item"><a href="/myBlog" class="nav-link text-white">My Blog</a></li>
             <li class="nav-item"><a href="/userProfile" class="nav-link text-white">Personal Information</a></li>
             <li class="nav-item"><a href="/logOut" class="nav-link text-white">Logout</a></li>
+            <li class="nav-item"><a href="/changePassword" class="nav-link text-white">Change Password</a></li>
           </ul>
         </div>
       
         <!-- Main Content -->
         <div class="main-content p-2 bg-dark">
           <!-- Top Navbar with Profile Info -->
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <nav class="navbar navbar-expand-lg navbar-light bg-dark">
             <div class="container">
-              <a class="navbar-brand" href="#">Admin Panel</a>
+              <a class="navbar-brand text-white" href="#">Admin Panel</a>
               <div class="collapse navbar-collapse d-flex justify-content-center" style="margin-left: 750px;" id="navbarNav">
                 <ul class="navbar-nav">
                   <!-- Profile Dropdown with Image and Username -->
                   <li class="nav-item dropdown" style="width: 60px; height: 60px;">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarProfileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarProfileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       <img src="<%= userPath %>" alt="<%=userName%>" class="rounded-circle img-fluid">
                       <span><%= userName %></span>
                     </a>
@@ -66,7 +67,7 @@
           </nav>
 
           <!-- Welcome message -->
-          <div class="top-nav">
+          <div class="top-nav text-white">
             <h1>Welcome Back, <%= userName %>...!</h1>
           </div>
       

@@ -8,7 +8,7 @@ const blogCon = require("../controllers/blog_controller.js");
 const myBlog = require("../controllers/myBlog_con.js");
 const userAuth = require("../middlewares/auth.js");
 const upload = require("../middlewares/multer_middlere.js");
-
+const changePass = require('../controllers/change_pass.js')
 
 //dashbord default path
 router.get("/", userAuth, con.userDefaultCon);
@@ -39,5 +39,7 @@ router.post("/my_BlogUpdate/:id", upload.single("imgPath"),myBlog.myBlogUpdateCo
 // myBlogDelete
 router.get("/my_BlogDelete/:id", myBlog.myBlogDeleteCon);
 
+router.get('/changePassword', changePass.changePass);
+router.post('/updatePass', changePass.updatePass);
 
 module.exports = router;

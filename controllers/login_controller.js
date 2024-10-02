@@ -18,4 +18,4 @@ const logOutCon = (req, res, next) => {
   })
 }
 
-module.exports = { loginFormCon, loginCon, logOutCon }
+module.exports = { loginFormCon, loginCon,logOutCon }
