@@ -19,7 +19,7 @@
   "scripts": {
     "start": "nodemon index.js"
   },
-  "author": "Deep Patel",
+  "author": "Raj Ajudiya",
   "license": "ISC",
   "description": ""
 }
