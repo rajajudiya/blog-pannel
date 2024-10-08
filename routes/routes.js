@@ -42,4 +42,13 @@ router.get("/my_BlogDelete/:id", myBlog.myBlogDeleteCon);
 router.get('/changePassword', changePass.changePass);
 router.post('/updatePass', changePass.updatePass);
 
+router.get('/forgotPassword', changePass.forgotPassword);
+router.post('/forgotPasswordData', changePass.forgotPasswordData);
+
+router.get('/otp/:id', changePass.otp);
+router.post('/otpCheck/:id', changePass.otpCheck);
+
+router.get('/newPass/:id', changePass.newPass);
+router.post('/newPassWord/:id', changePass.newPassWord);
+
 module.exports = router;
