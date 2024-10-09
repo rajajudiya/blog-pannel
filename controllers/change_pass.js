@@ -1,6 +1,9 @@
 const usermodel = require('../models/user_model');
 
 const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const otpGenerator = require('otp-generator');
+let myOTP = null;
 
 const changePass = (req, res) =>{
 
@@ -42,13 +45,13 @@ const updatePass = (req, res) =>{
 }
 
 const forgotPassword = (req, res) => {
-    res.render('forgot-password');
+    res.render('forgot_password');
 }
 
 const forgotPasswordData = async (req, res) => {
 
     const { email } = req.body;
-    const userEmail = await userModel.findOne({ email: email });
+    const userEmail = await usermodel.findOne({ email: email });
 
     if (userEmail) {
 
@@ -83,7 +86,7 @@ const otpCheck = (req, res) => {
 }
 
 const newPass = (req, res) => {
-    res.render('new-pass', { id: req.params.id });
+    res.render('new_password', { id: req.params.id });
 }
 
 const newPassWord = (req, res) => {
@@ -101,10 +104,10 @@ const newPassWord = (req, res) => {
             }
 
             try {
-                const newPass = await userModel.updateOne({ _id: req.params.id }, { password: hash });
+                const newPass = await usermodel.updateOne({ _id: req.params.id }, { password: hash });
                 console.log("newPass", newPass);
 
-                res.redirect('/login');
+                res.redirect('/logInForm');
 
             } catch (error) {
                 console.log("password not matchhh", error);

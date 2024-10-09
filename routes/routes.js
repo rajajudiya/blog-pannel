@@ -8,8 +8,10 @@ const blogCon = require("../controllers/blog_controller.js");
 const myBlog = require("../controllers/myBlog_con.js");
 const userAuth = require("../middlewares/auth.js");
 const upload = require("../middlewares/multer_middlere.js");
-const changePass = require('../controllers/change_pass.js')
+const changePass = require('../controllers/change_pass.js');
+const topic = require('../controllers/topic_con.js');
 
+router.get("/topic",topic.topic)
 //dashbord default path
 router.get("/", userAuth, con.userDefaultCon);
 router.get("/userProfile", userAuth, con.userProfileCon)
