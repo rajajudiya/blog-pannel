@@ -1,17 +1,18 @@
 const express = require("express");
 const router = express.Router();
 const con = require("../controllers/controller.js");
-const regCon = require("../controllers/register_controller.js");
-const loginCon = require("../controllers/login_controller.js");
+const regCon = require("../controllers/register.js");
+const loginCon = require("../controllers/login.js");
 const passport = require("../middlewares/passport_config.js");
-const blogCon = require("../controllers/blog_controller.js");
-const myBlog = require("../controllers/myBlog_con.js");
 const userAuth = require("../middlewares/auth.js");
 const upload = require("../middlewares/multer_middlere.js");
 const changePass = require('../controllers/change_pass.js');
-const topic = require('../controllers/topic_con.js');
+const addTopic = require("../controllers/topic_con.js");
+// const addSubTopic = require("../controllers/subTopic_Controller.js");
+const blogCon = require("../controllers/blog_controller.js");
+const myBlog = require("../controllers/myBlog_con.js");
 
-router.get("/topic",topic.topic)
+
 //dashbord default path
 router.get("/", userAuth, con.userDefaultCon);
 router.get("/userProfile", userAuth, con.userProfileCon)
@@ -28,14 +29,14 @@ router.post("/login", passport.authenticate('local', { failureRedirect: '/loginF
 router.get("/logOut", loginCon.logOutCon);
 
 //blogAd
-router.get("/blog_Add",blogCon.blogShowCon);
+router.get("/blog_view", userAuth, blogCon.blogShowCon);
 router.post("/blogShow", upload.single("imgPath") ,blogCon.blogDataCon);
 
 //myBlog
-router.get("/myBlog", myBlog.myBlogShowCon);
+router.get("/myBlog", userAuth, myBlog.myBlogShowCon);
 
 // myBlogEdit
-router.get("/my_blogEdit/:id", myBlog.myBlogEaditCon);
+router.get("/my_BlogEdit/:id", myBlog.myBlogEaditCon);
 router.post("/my_BlogUpdate/:id", upload.single("imgPath"),myBlog.myBlogUpdateCon);
 
 // myBlogDelete
@@ -52,5 +53,15 @@ router.post('/otpCheck/:id', changePass.otpCheck);
 
 router.get('/newPass/:id', changePass.newPass);
 router.post('/newPassWord/:id', changePass.newPassWord);
+
+// add topice
+router.get("/add_TopicForm", addTopic.addToPic);
+router.post("/addTopiceCon", addTopic.addTopic_Con);
+
+//delete topice
+router.get("/deleteTopicCon/:id", addTopic.deleteTopic_Con);
+
+router.post("/formComment",blogCon.addComentsContoller)
+
 
 module.exports = router;

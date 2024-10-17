@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blog Page Add</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="./css/register.css">
+  <style>
+    /* Custom styles for the profile image */
+    .profile-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .navbar .dropdown-menu {
+      right: 0;
+      left: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Add Blog Modal -->
+  <div class="modal fade" id="addBlogModal" tabindex="-1" aria-labelledby="addBlogModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addBlogModalLabel">Add New Blog</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/blogShow" method="post" class="mb-5" enctype="multipart/form-data">
+            <div class="mb-3">
+              <label for="imgPath" class="form-label">Image URL :</label>
+              <input type="file" class="form-control" id="imgPath" name="imgPath" placeholder="Enter image URL"
+                required>
+            </div>
+            <div class="mb-3">
+              <label for="username" class="form-label">Username :</label>
+              <input type="text" class="form-control" id="username" name="userName" placeholder="Enter your username"
+                required>
+            </div>
+
+            <div class="mb-3">
+              <label for="date" class="form-label">Date :</label>
+              <input type="date" class="form-control" id="date" name="date" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="title" class="form-label">Title :</label>
+              <input type="text" class="form-control" id="title" name="title" placeholder="Enter blog title" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="description" class="form-label">Description :</label>
+              <textarea class="form-control" id="description" name="description" rows="4"
+                placeholder="Enter blog description" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Blog</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <div class="sidebar bg-dark text-white p-3">
+      <h2 class="text-light text-center fw-bold fs-1 pt-4">DP</h2>
+      <ul class="nav flex-column">
+        <li class="nav-item"><a href="/" class="nav-link text-white">Dashboard</a></li>
+        <li class="nav-item"><a href="#" class="nav-link text-white" data-bs-toggle="modal"
+            data-bs-target="#addBlogModal">Add Blog</a></li>
+        <li class="nav-item"><a href="/blog_view" class="nav-link text-white">View Blog</a></li>
+        <li class="nav-item"><a href="/myBlog" class="nav-link text-white">My Blog</a></li>
+        <li class="nav-item"><a href="/userProfile" class="nav-link text-white">Personal Information</a></li>
+        <li class="nav-item"><a href="/logOut" class="nav-link text-white">Logout</a></li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content p-4">
+      <!-- Top Navbar with Profile Info -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <div class="container">
+          <a class="navbar-brand" href="#" style="color: white;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+            </svg>
+          </a>
+          <div class="collapse navbar-collapse d-flex justify-content-center" style="margin-left: 750px;"
+            id="navbarNav">
+            <ul class="navbar-nav">
+              <!-- Profile Dropdown with Image and Username -->
+              <li class="nav-item dropdown " style="width: 60px; height: 60px;">
+                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarProfileDropdown" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="<%= userPath %>" alt="<%=userName%>" class="rounded-circle img-fluid" width="500px"
+                    height="500px">
+                  <span style="color: white;">
+                    <%= userName %>
+                  </span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" style="right: 0;">
+                  <li><a class="dropdown-item" href="/userProfile">View Profile</a></li>
+                  <li><a class="dropdown-item" href="#">Settings</a></li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li><a class="dropdown-item" href="/logOut">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </nav>
+
+      <!-- blog posts -->
+      <div class="container mt-4">
+        <h2 class="text-center fs-1">Blogs Post</h2>
+        <div class="row">
+          <div class="mx-auto " style="width: 1000px;">
+            <!-- Display Blog Posts -->
+            <% if (blogData.length> 0) { %>
+              <% blogData.forEach(post=> { %>
+                <div class="card mb-4" style="width: 100%; object-fit: cover;">
+                  <img src="<%= post.imgPath %>" alt="<%= post.title %>" width="100%" height="500px">
+                  <div class="card-body">
+                    <h5 class="card-title fs-1 text-black">
+                      <%= post.title %>
+                    </h5>
+                    <p class="card-text fs-4">
+                      <%= post.description %>
+                    </p>
+                    <p class="text-muted">Posted by:
+                      <span class="text-black">
+                        <%= post.userName %>
+                      </span>
+                    </p>
+                    <p class="text-muted">Date:
+                      <span class="text-black">
+                        <%= new Date(post.date).toLocaleDateString('en-GB') %>
+                      </span>
+                    </p>
+                     
+                    
+                    <!-- Display comments for this blog -->
+                     <h5>Comments:</h5>
+                     <% commentAdd.filter(comment => comment.blog.toString() === post._id.toString()).forEach(comment => { %>
+                       <div class="comment-box">
+                         <p> <%= comment.user.userName %> : <%= comment.comment %></p>
+                       </div>
+                     <% }) %>
+       
+                     <!-- Comment form for this blog -->
+                     <form class="d-flex" role="search" action="/formComment" method="post">
+                       <input type="hidden" name="blog" value="<%= post._id %>">
+                       <input class="form-control me-2" type="search" name="text" placeholder="comment"
+                       aria-label="Search">
+                     <button class="btn btn-outline-primary" type="submit">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-send" viewBox="0 0 16 16">
+                         <path
+                           d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
+                       </svg>
+                     </button>
+                     </form>
+                  </div>
+
+                </div>
+                <% }) %>
+                <% } else { %>
+                  <p class="text-center">No blog posts available. Start by adding one!</p>
+              <% } %>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"></script>
+    <script>
+      // JavaScript to handle the hide/show of navbar on scroll
+      let lastScrollTop = 0;
+      const navbar = document.querySelector('.navbar');
+
+      window.addEventListener('scroll', function () {
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (currentScroll > lastScrollTop) {
+          // Scrolling down
+          navbar.classList.add('navbar-hidden');
+        } else {
+          // Scrolling up
+          navbar.classList.remove('navbar-hidden');
+        }
+        lastScrollTop = currentScroll;
+      });
+    </script>
+</body>
+
+</html>

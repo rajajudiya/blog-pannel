@@ -7,7 +7,7 @@ let myOTP = null;
 
 const changePass = (req, res) =>{
 
-    res.render('change_password');
+    res.render('change_pass');
 
 }
 
@@ -45,7 +45,7 @@ const updatePass = (req, res) =>{
 }
 
 const forgotPassword = (req, res) => {
-    res.render('forgot_password');
+    res.render('forgot_pass');
 }
 
 const forgotPasswordData = async (req, res) => {
